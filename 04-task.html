@@ -3,67 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 4</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid black;
-        }
-
-        td, th {
-            padding: 8px;
-        }
-    </style>
+    <title>Task 04</title>
 </head>
 
 <body>
-    <table id="statsTable">
-        <tr>
-            <td>Январь</td>
-            <td>120</td>
-        </tr>
-        <tr>
-            <td>Февраль</td>
-            <td>140</td>
-        </tr>
-        <tr>
-            <td>Март</td>
-            <td>115</td>
-        </tr>
-        <tr>
-            <td>Апрель</td>
-            <td>100</td>
-        </tr>
-        <tr>
-            <td>Март</td>
-            <td>80</td>
-        </tr>
-        <tr>
-            <td>Июнь</td>
-            <td>90</td>
-        </tr>
-        <tr>
-            <td>Июль</td>
-            <td>100</td>
-        </tr>
-        <tr>
-            <th>Итого</th>
-            <th id="output"></th>
-        </tr>
-    </table>
+    <ul id="list">
+        <li>Яблого</li>
+        <li>Груша</li>
+        <li>Апельсин</li>
+        <li>Мандарин</li>
+        <li>Ананас</li>
+        <li>Слива</li>
+    </ul>
+    <button id="btn">Sort</button>
+
     <script>
         /*
         Задание:
-        Напишите сценарий, который на основании значений во второй колонке таблицы #statsTable поменяет цвет строк таблицы (tr)
-        Если во второй ячейке значение больше 100, строка должна отображаться зеленым цветом, если значение менее 100 - красным цветом.
-        Для смены цвета строки используйте код row.style.backgroundColor = "цвет"
+        Перепишите сценарий. Сделайте так, чтобы сортировка элементов в #list происходила при нажатии
+        на кнопку (кнопку нужно добавить), а не при загрузке страницы
         */
+
+        function sortbtn() {
+            let list = document.querySelector("#list");
+
+            let items = document.querySelectorAll("li"); // получаем объект NodeList (это не массив)
+            let itemsArray = Array.from(items); // на основе NodeList создаем массив
+
+            itemsArray.sort(function (a, b) {
+                if (a.textContent < b.textContent)
+                    return -1;
+                if (a.textContent > b.textContent)
+                    return 1;
+                return 0;
+            });
+
+            itemsArray.forEach(item => {
+                list.append(item);
+            });
+        }
+
+        let sortBtn = document.querySelector("#btn");
+        sortBtn.addEventListener("click", sortbtn);
+
     </script>
 </body>
 

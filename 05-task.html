@@ -3,527 +3,137 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 5</title>
+    <title>Task 05</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .task-list {
+            width: 500px;
+        }
+
+        #start-message {
+            margin: 10px;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid gray;
+            padding: 3px 8px;
+            margin: 2px 10px;
+        }
+
+        .task p {
+            margin-left: 4px;
+        }
+
+        .completed {
+            background-color: green;
+            color: white;
+        }
+
+        .completed p {
+            text-decoration: line-through;
+        }
+
+        .input-panel {
+            width: 500px;
+            margin: 8px;
+            padding: 2px;
+        }
+
+        .input-panel button {
+            padding: 4px;
+            width: 25%;
+        }
+
+        .input-panel input {
+            height: 23px;
+            padding-left: 4px;
+            width: 68%;
+        }
+    </style>
 </head>
 
 <body>
-    <h2>Email адреса пользователей</h2>
-    <p id="emailAddressesOutput">
+    <div class="input-panel">
+        <input type="text" id="task-name-input">
+        <button id="add-task-btn">Добавить задачу</button>
+    </div>
 
-    </p>
-    <h2>Пользователь, у которого больше всего друзей</h2>
-    <p id="greatesFriendsCountOutput"></p>
-
-    </p>
-
-    <h2>Компания пользователя с наибольшим балансом</h2>
-    <p id="greatestBalanceCompanyOutput">
-
-    </p>
-
-
-    <h2>Компания пользователя с наименьшим балансом</h2>
-    <p id="lowestBalanceCompanyOutput">
-
-    </p>
+    <div class="task-list">
+        <p id="start-message">Нет новых задач</p>
+    </div>
 
     <script>
-
         /*
         Задание:
-        Перепишите код таким образом, чтобы он не поменял своего поведения, но результат работы сценария выводился не в консоль, а в соответствующие p.
-        
-        Электронные адреса пользователей (каждый адрес с новой строки) - параграф с id emailAddressesOutput
-        Пользователи с наибольшим количеством друзей (каждый пользователь с новой строки) - параграф с id greatesFriendsCountOutput
-        Компании пользователей с наибольшим балансом - параграф с id greatestBalanceCompanyOutput
-        Компании пользователей с наименьшим балансом - параграф с id lowestBalanceCompanyOutput
+        Сделайте так, чтобы в каждой созданной задаче, после текста задачи создавалась кнопка "Удалить".
+        При нажатии на которую вся задача удалялась из списка задач.
         */
-        // массив сгенерирован с помощью https://next.json-generator.com/
-        let users = [
-            {
-                balance: '1250.89',
-                age: 24,
-                name: {
-                    first: 'Golden',
-                    last: 'Clements'
-                },
-                company: 'EWAVES',
-                email: 'golden.clements@ewaves.io',
-                friends: [
-                    {
-                        id: 0,
-                        name: 'Buchanan Austin'
-                    },
-                    {
-                        id: 1,
-                        name: 'Richmond Garrison'
-                    },
-                    {
-                        id: 2,
-                        name: 'Burns Cook'
-                    },
-                    {
-                        id: 3,
-                        name: 'Sally Mcpherson'
-                    },
-                    {
-                        id: 4,
-                        name: 'Nina Hood'
-                    },
-                    {
-                        id: 5,
-                        name: 'Rhonda Anderson'
-                    },
-                    {
-                        id: 6,
-                        name: 'Mathis Bowen'
-                    },
-                    {
-                        id: 7,
-                        name: 'Janie Carlson'
-                    },
-                    {
-                        id: 8,
-                        name: 'Brooke Reilly'
-                    },
-                    {
-                        id: 9,
-                        name: 'Peters Oliver'
-                    }
-                ],
-                favoriteFruit: 'strawberry'
-            },
-            {
-                balance: '3637.94',
-                age: 23,
-                name: {
-                    first: 'Francis',
-                    last: 'Hebert'
-                },
-                company: 'XPLOR',
-                email: 'francis.hebert@xplor.biz',
-                friends: [
-                    {
-                        id: 0,
-                        name: 'Clements Glass'
-                    },
-                    {
-                        id: 1,
-                        name: 'Gutierrez Padilla'
-                    },
-                    {
-                        id: 2,
-                        name: 'Noelle Wilkinson'
-                    },
-                    {
-                        id: 3,
-                        name: 'Kim Sampson'
-                    },
-                    {
-                        id: 4,
-                        name: 'Luz Palmer'
-                    }
-                ],
-                favoriteFruit: 'apple'
-            },
-            {
-                balance: '1106.44',
-                age: 31,
-                name: {
-                    first: 'Hale',
-                    last: 'Cross'
-                },
-                company: 'EARTHPURE',
-                email: 'hale.cross@earthpure.us',
-                friends: [
-                    {
-                        id: 0,
-                        name: 'Terri Clark'
-                    },
-                    {
-                        id: 1,
-                        name: 'Marie Joyce'
-                    },
-                    {
-                        id: 2,
-                        name: 'Howell Moses'
-                    },
-                    {
-                        id: 3,
-                        name: 'Juarez Marshall'
-                    },
-                    {
-                        id: 4,
-                        name: 'Corinne Grant'
-                    },
-                    {
-                        id: 5,
-                        name: 'Chandra Ferrell'
-                    },
-                    {
-                        id: 6,
-                        name: 'Emily Kidd'
-                    },
-                    {
-                        id: 7,
-                        name: 'Claudine Pollard'
-                    },
-                    {
-                        id: 8,
-                        name: 'Walter Cooper'
-                    },
-                    {
-                        id: 9,
-                        name: 'Isabella Hays'
-                    }
-                ],
-                favoriteFruit: 'strawberry'
-            },
-            {
-                balance: '2502.43',
-                age: 25,
-                name: {
-                    first: 'Delores',
-                    last: 'Sykes'
-                },
-                company: 'ASSITIA',
-                email: 'delores.sykes@assitia.com',
-                friends: [
-                    {
-                        id: 0,
-                        name: 'Amy Fox'
-                    },
-                    {
-                        id: 1,
-                        name: 'Laurel Gaines'
-                    },
-                    {
-                        id: 2,
-                        name: 'Mcguire French'
-                    },
-                    {
-                        id: 3,
-                        name: 'Savage Rocha'
-                    },
-                    {
-                        id: 4,
-                        name: 'Durham Fowler'
-                    },
-                    {
-                        id: 5,
-                        name: 'Jacobson Clay'
-                    },
-                    {
-                        id: 6,
-                        name: 'Hamilton Pierce'
-                    },
-                    {
-                        id: 7,
-                        name: 'Johns Jefferson'
-                    },
-                    {
-                        id: 8,
-                        name: 'Avery Campbell'
-                    }
-                ],
-                favoriteFruit: 'strawberry'
-            },
-            {
-                balance: '3651.54',
-                age: 21,
-                name: {
-                    first: 'Ryan',
-                    last: 'Bolton'
-                },
-                company: 'MOLTONIC',
-                email: 'ryan.bolton@moltonic.biz',
-                friends: [
-                    {
-                        id: 0,
-                        name: 'Weaver Buchanan'
-                    },
-                    {
-                        id: 1,
-                        name: 'Francesca Rice'
-                    },
-                    {
-                        id: 2,
-                        name: 'Sheppard Calhoun'
-                    },
-                    {
-                        id: 3,
-                        name: 'Schmidt Murray'
-                    }
-                ],
-                favoriteFruit: 'apple'
-            },
-            {
-                balance: '1345.79',
-                age: 21,
-                name: {
-                    first: 'Carey',
-                    last: 'Schwartz'
-                },
-                company: 'UXMOX',
-                email: 'carey.schwartz@uxmox.info',
-                friends: [
-                    {
-                        id: 0,
-                        name: 'Lilia Wiggins'
-                    },
-                    {
-                        id: 1,
-                        name: 'Snider Tanner'
-                    },
-                    {
-                        id: 2,
-                        name: 'Taylor Perez'
-                    },
-                    {
-                        id: 3,
-                        name: 'Raquel Castaneda'
-                    },
-                    {
-                        id: 4,
-                        name: 'Burris Mcmahon'
-                    },
-                    {
-                        id: 5,
-                        name: 'Henderson Osborn'
-                    },
-                    {
-                        id: 6,
-                        name: 'Carrillo Ortiz'
-                    },
-                    {
-                        id: 7,
-                        name: 'Herminia Puckett'
-                    },
-                    {
-                        id: 8,
-                        name: 'Shelby Ware'
-                    }
-                ],
-                favoriteFruit: 'banana'
-            },
-            {
-                balance: '3261.11',
-                age: 30,
-                name: {
-                    first: 'Trevino',
-                    last: 'Mullins'
-                },
-                company: 'TERRASYS',
-                email: 'trevino.mullins@terrasys.org',
-                friends: [
-                    {
-                        id: 0,
-                        name: 'Corine Deleon'
-                    },
-                    {
-                        id: 1,
-                        name: 'Alta Walker'
-                    },
-                    {
-                        id: 2,
-                        name: 'Jeannie Santana'
-                    },
-                    {
-                        id: 3,
-                        name: 'Velazquez Oneill'
-                    },
-                    {
-                        id: 4,
-                        name: 'Perry Merrill'
-                    },
-                    {
-                        id: 5,
-                        name: 'Tabitha Mcintosh'
-                    },
-                    {
-                        id: 6,
-                        name: 'Shields Castillo'
-                    }
-                ],
-                favoriteFruit: 'banana'
-            },
-            {
-                balance: '1659.17',
-                age: 20,
-                name: {
-                    first: 'Gilliam',
-                    last: 'Mendez'
-                },
-                company: 'ZENTHALL',
-                email: 'gilliam.mendez@zenthall.tv',
-                friends: [
-                    {
-                        id: 0,
-                        name: 'Nora Ratliff'
-                    },
-                    {
-                        id: 1,
-                        name: 'Simone Michael'
-                    },
-                    {
-                        id: 2,
-                        name: 'Lang Rose'
-                    },
-                    {
-                        id: 3,
-                        name: 'Priscilla Hester'
-                    },
-                    {
-                        id: 4,
-                        name: 'Stuart Barker'
-                    },
-                    {
-                        id: 5,
-                        name: 'Florine Mcintyre'
-                    },
-                    {
-                        id: 6,
-                        name: 'Karin Rosa'
-                    },
-                    {
-                        id: 7,
-                        name: 'Vinson Rutledge'
-                    }
-                ],
-                favoriteFruit: 'strawberry'
-            },
-            {
-                balance: '2340.54',
-                age: 32,
-                name: {
-                    first: 'Brewer',
-                    last: 'Vargas'
-                },
-                company: 'QIMONK',
-                email: 'brewer.vargas@qimonk.co.uk',
-                friends: [
-                    {
-                        id: 0,
-                        name: 'Tamera Sharp'
-                    },
-                    {
-                        id: 1,
-                        name: 'Jackie Parks'
-                    },
-                    {
-                        id: 2,
-                        name: 'Wanda Merritt'
-                    },
-                    {
-                        id: 3,
-                        name: 'Castillo Sloan'
-                    }
-                ],
-                favoriteFruit: 'apple'
-            },
-            {
-                balance: '1736.91',
-                age: 24,
-                name: {
-                    first: 'Newman',
-                    last: 'Wynn'
-                },
-                company: 'VISALIA',
-                email: 'newman.wynn@visalia.name',
-                friends: [
-                    {
-                        id: 0,
-                        name: 'Lopez Mccarthy'
-                    },
-                    {
-                        id: 1,
-                        name: 'Melinda Diaz'
-                    },
-                    {
-                        id: 2,
-                        name: 'Silva Shepherd'
-                    },
-                    {
-                        id: 3,
-                        name: 'Claudia Contreras'
-                    },
-                    {
-                        id: 4,
-                        name: 'Jenna Golden'
-                    },
-                    {
-                        id: 5,
-                        name: 'Blair Hayden'
-                    },
-                    {
-                        id: 6,
-                        name: 'Antonia Woods'
-                    },
-                    {
-                        id: 7,
-                        name: 'Felecia Greer'
-                    },
-                    {
-                        id: 8,
-                        name: 'Sherry Howard'
-                    },
-                    {
-                        id: 9,
-                        name: 'Montgomery Cohen'
-                    }
-                ],
-                favoriteFruit: 'apple'
+        let taskNameInput = document.querySelector("#task-name-input");
+        let addTaskButton = document.querySelector("#add-task-btn");
+        let startMessage = document.querySelector("#start-message");
+        let taskList = document.querySelector(".task-list");
+
+        addTaskButton.addEventListener("click", addTaskHandler);
+
+        function createTask(text) {
+            let div = document.createElement("div");
+            div.classList.add("task");
+
+            let input = document.createElement("input");
+            input.addEventListener("click", changeTaskState);
+            input.type = "checkbox";
+
+            let p = document.createElement("p");
+            p.innerText = text;
+
+            let btn = document.createElement("button");
+            btn.classList.add("btn-del");
+            btn.innerHTML = "Delete tasks";
+            btn.addEventListener("click", delTasks);
+
+            div.append(input);
+            div.append(p);
+            div.append(btn);
+
+            return div;
+        }
+
+        function changeTaskState() {
+            if (this.checked) {
+                this.parentElement.classList.add("completed");
+            } else {
+                this.parentElement.classList.remove("completed");
             }
-        ];
-
-        function showAllEmails() {
-            console.log("Электронные адреса пользователей:")
-            users.forEach(user => console.log(user.email));
         }
 
-        function showHigestFriendCount() {
-            console.log("Пользователи с наибольшим количеством друзей");
+        function addTaskHandler() {
+            if (taskNameInput.value) {
+                if (!startMessage.hidden) startMessage.hidden = true;
 
-            let max = Number.MIN_VALUE;
-
-            users.forEach(user => {
-                if (max < user.friends.length)
-                    max = user.friends.length;
-            });
-
-            users
-                .filter(user => user.friends.length == max)
-                .forEach(user => console.log(user.name.first + " " + user.name.last));
+                let newTask = createTask(taskNameInput.value);
+                taskList.append(newTask);
+                taskNameInput.value = "";
+            } else {
+                alert("введите имя задачи");
+            }
         }
 
-        function showMinMaxBalance() {
-            let minBalance = Number.MAX_VALUE;
-            let maxBalance = Number.MIN_VALUE;
-
-            users.forEach(user => {
-                const currentBalance = +user.balance;
-                if (currentBalance > maxBalance)
-                    maxBalance = currentBalance;
-                else if (currentBalance < minBalance) {
-                    minBalance = currentBalance;
-                }
-            });
-
-            console.log("Компании пользователей с наибольшим балансом:")
-            users
-                .filter(user => user.balance == maxBalance)
-                .forEach(user => console.log(user.company));
-
-            console.log("Компании пользователей с наименьшим балансом:")
-            users
-                .filter(user => user.balance == minBalance)
-                .forEach(user => console.log(user.company));
+        function delTasks() {
+            this.parentElement.remove();
         }
-
-        showAllEmails();
-        showHigestFriendCount();
-        showMinMaxBalance();
     </script>
 </body>
 

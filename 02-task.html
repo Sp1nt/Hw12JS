@@ -3,42 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 2</title>
-
-    <style>
-        #color-sample {
-            width: 250px;
-            height: 70px;
-            margin: 10px;
-        }
-    </style>
+    <title>Task 02</title>
 </head>
 
 <body>
-    <div id="color-sample"></div>
-    <p>Цвет: </p>
 
+    <div>
+        <input type="text" id="value1">
+        <input type="text" id="value2">
+    </div>
+
+    <button onclick="calculateVolume()">Рассчитать</button>
     <script>
         /*
         Задание:
-        Поправьте сценарий таким образом, чтобы кроме изменения цвета div#color-sample в параграфе под div выводилось сообщение
-        Цвет: #000000
-        Где #000000 значение, цвета фона элемента div#color-sample
+        Напишите сценарий, который вычисляет объем цилиндра по параметрам, которые вводит пользователь.
+        Для расчета используйте формулу - V=π * r в квадрате * h
+        Разместите на странице два поля ввода - первое для радиуса цилиндра, второе для высоты цилиндра.
+        Объем цилиндра выведите в тело страницы.
         */
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
+
+        function calculateVolume() {
+            let r = document.querySelector("#value1").value;
+            let h = document.querySelector("#value2").value;
+
+            alert(`Объём цилиндра: ${Math.floor(Math.PI * Math.pow(r, 2) * h)}`);
         }
-
-        let colorSampleDiv = document.querySelector("#color-sample");
-        colorSampleDiv.style.backgroundColor = getRandomColor();
-
-
     </script>
 </body>
 

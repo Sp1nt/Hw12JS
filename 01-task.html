@@ -3,19 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 1</title>
+    <title>Task 01</title>
 </head>
 
 <body>
-    <div>Вы ввели: <span></span></div>
-
+    <button id="testBtn">Test Button</button>
     <script>
         /*
         Задание:
-        Выведите значение переменной input в span, расположенный на странице
+        Добавьте для кнопки testBtn обработчик на событие click.
+        Обработчик должен выводить на экран сообщение Hello world.
+        Добавьте обработчик тремя разными способами.
         */
-        let input = prompt("Введите сообщение");
+
+        let btn = document.querySelector("#testBtn");
+        btn.addEventListener("click", function () {
+            alert("Hello world!");
+        });
     </script>
 </body>
 
